@@ -1,5 +1,6 @@
 <script>
 	import Button from '@smui/button';
+	import { onMount } from 'svelte';
 	import List, { Item, Meta, Label } from '@smui/list';
 	import Checkbox from '@smui/checkbox';
 	import TextField from '@smui/textfield';
@@ -33,9 +34,13 @@
 		console.log('clear');
 		todos = todos.filter((todo) => !todo.complete);
 	}
-	$: {
-		console.log(todos);
-	}
+	let API_URL;
+	onMount(() => {
+		if (process) {
+			API_URL = process?.env.API_URL;
+			console.log(API_URL);
+		}
+	});
 </script>
 
 <div class="container">
@@ -63,7 +68,7 @@
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Roboto&display=swap');
-	
+
 	.container {
 		width: 50%;
 		display: flex;
