@@ -1,4 +1,8 @@
 <script>
+	import Button from '@smui/button';
+	import List, { Item, Meta, Label } from '@smui/list';
+	import Checkbox from '@smui/checkbox';
+	import TextField from '@smui/textfield';
 	let todo = '';
 	let todos = [
 		{ id: '1', complete: false, content: 'go on a run' },
@@ -6,7 +10,8 @@
 		{ id: '3', complete: false, content: 'call gran' },
 		{ id: '4', complete: false, content: 'take bins out' }
 	];
-	function handleSubmit(event) {
+
+	function handleSubmit() {
 		console.log('submit');
 		todos.push({ complete: false, content: todo, id: Date.now().toLocaleString() });
 		todos = todos;
@@ -33,20 +38,63 @@
 	}
 </script>
 
-<h1>Todos</h1>
-<ul>
-	{#each todos as todo}
-		<li
-			on:click|preventDefault={() => {
-				handleComplete(todo.id);
-			}}
-		>
-			{todo.content}
-		</li>
-	{/each}
-</ul>
-<form on:submit|preventDefault={handleSubmit}>
-	<input bind:value={todo} type="text" />
-	<button>Add</button>
-</form>
-<button on:click|preventDefault={handleClear}>Clear </button>
+<div class="container">
+	<h1 class="header">Todos</h1>
+	<List checkList>
+		{#each todos as todo}
+			<Item
+				on:click={() => {
+					handleComplete(todo.id);
+				}}
+			>
+				<Label>{todo.content}</Label>
+				<Meta>
+					<Checkbox />
+				</Meta>
+			</Item>
+		{/each}
+	</List>
+	<form on:submit|preventDefault={handleSubmit} class="form">
+		<TextField style="width: 800%;" class="header" bind:value={todo} type="text" />
+		<Button>Add</Button>
+	</form>
+	<Button on:click={handleClear}>Clear</Button>
+</div>
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&family=Roboto&display=swap');
+	
+	.container {
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		margin: auto;
+		font-family: 'Roboto', sans-serif;
+	}
+	.header {
+		margin: auto;
+	}
+	.form {
+		margin: auto;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		align-items: flex-end;
+	}
+	/*
+	.complete {
+		background-color: green;
+	}
+	.incomplete {
+		background-color: red;
+	}
+	.list {
+		width: 100%;
+		margin: auto;
+	}
+	.list-element {
+		list-style-type: none;
+		padding: 10px;
+	} */
+</style>
