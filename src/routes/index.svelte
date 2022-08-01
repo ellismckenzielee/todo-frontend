@@ -1,6 +1,7 @@
 <script>
 	import Button from '@smui/button';
 	import { onMount } from 'svelte';
+	import { getTodos } from '../utils/api.utils';
 	import List, { Item, Meta, Label } from '@smui/list';
 	import Checkbox from '@smui/checkbox';
 	import TextField from '@smui/textfield';
@@ -39,6 +40,7 @@
 		if (process) {
 			API_URL = process?.env.API_URL;
 			console.log(API_URL);
+			getTodos();
 		}
 	});
 </script>
