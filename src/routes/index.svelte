@@ -23,6 +23,11 @@
 			return todo;
 		});
 	}
+
+	function handleClear() {
+		console.log('clear');
+		todos = todos.filter((todo) => !todo.complete);
+	}
 	$: {
 		console.log(todos);
 	}
@@ -44,3 +49,4 @@
 	<input bind:value={todo} type="text" />
 	<button>Add</button>
 </form>
+<button on:click|preventDefault={handleClear}>Clear </button>
