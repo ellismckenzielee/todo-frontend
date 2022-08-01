@@ -20,7 +20,7 @@ describe('testing api functions', () => {
 			// ARRANGE
 			const url = 'fakeurl.com';
 			// ACT
-			const result = await getTodos(url);
+			await getTodos(url);
 			// ASSERT
 			expect(axios.get.mock.lastCall[0]).toBe(url);
 		});

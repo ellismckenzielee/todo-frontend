@@ -1,5 +1,6 @@
 import axios from 'axios';
-export const getTodos = async (url) => {
-	console.log('RUNNING GET TODOS');
+async function getTodos(url) {
 	return await axios.get(url).body;
-};
+}
+
+export { getTodos };
